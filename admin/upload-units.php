@@ -36,6 +36,7 @@
               'post_content'  => file_get_contents($_FILES["file"]["tmp_name"]),
               'post_status'   => 'publish',
               'post_author'   => 1,
+              'has_archive'   => true,
               'post_category' => array( 8,39 )
             );
 

@@ -216,5 +216,4 @@ class Plugin_Name {
 	public function get_version() {
 		return $this->version;
 	}
-
 }
