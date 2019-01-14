@@ -19,31 +19,31 @@
 </script>
 
 
-<?php 
+<?php
     if( isset($_POST['upload-file-nonce']) && wp_verify_nonce( $_POST['upload-file-nonce'], 'upload-file-nonce' ) ) {
         if(current_user_can( 'manage_options' ) ) {
 
 
           if( isset($_POST["submit"])) {
-            echo 'File uploaded: ';
-            echo ' '.str_replace(".html", " ", $_FILES["file"]["name"] );
-            echo ' '.$_FILES["file"]["type"];
-            echo ' '.$_FILES["file"]["size"];
-
-            $my_post = array(
-              'post_type'     => 'Unit',
-              'post_title'    => str_replace(".html", " ", $_FILES["file"]["name"] ),
-              'post_content'  => file_get_contents($_FILES["file"]["tmp_name"]),
-              'post_status'   => 'publish',
-              'post_author'   => 1,
-              'has_archive'   => true,
-              'post_category' => array( 8,39 )
-            );
-
-            wp_insert_post( $my_post );
+            // echo 'File uploaded: ';
+            // echo ' '.str_replace(".html", " ", $_FILES["file"]["name"] );
+            // echo ' '.$_FILES["file"]["type"];
+            // echo ' '.$_FILES["file"]["size"];
+            //
+            // $my_post = array(
+            //   'post_type'     => 'Unit',
+            //   'post_title'    => str_replace(".html", " ", $_FILES["file"]["name"] ),
+            //   'post_content'  => file_get_contents($_FILES["file"]["tmp_name"]),
+            //   'post_status'   => 'publish',
+            //   'post_author'   => 1,
+            //   'has_archive'   => true,
+            //   'post_category' => array( 8,39 )
+            // );
+            //
+            // wp_insert_post( $my_post );
           }
 
 
         }
-    } 
+    }
 ?>

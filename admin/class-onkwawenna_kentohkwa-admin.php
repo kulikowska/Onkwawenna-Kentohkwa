@@ -129,6 +129,21 @@ class Plugin_Name_Admin {
                 'has_archive' => true,
             )
         );
+
+				$set = get_option( 'post_type_rules_flushed_onkwawenna_kentohkwa' );
+				if ( $set !== true ){
+			    flush_rewrite_rules( false );
+			    update_option( 'post_type_rules_flushed_onkwawenna_kentohkwa', true );
+				}
+
+				// Disable gutenberg
+				function onkwawenna_kentohkwa_disable_gutenberg($is_enabled, $post_type) {
+					if ($post_type === 'unit')  {
+						return false;
+					}
+					return $is_enabled;
+				}
+				add_filter('use_block_editor_for_post_type', 'onkwawenna_kentohkwa_disable_gutenberg', 10, 2);
     }
 
     /* create backend menu */
@@ -139,5 +154,48 @@ class Plugin_Name_Admin {
             include 'upload-units.php';
         });
     }
+
+		public function add_onkwawenna_kentohkwa_meta_box( ) {
+			add_meta_box(
+				'onkwawenna_kentohkwa_upload',
+				'Onkwawenna Kentohkwa Media',
+				'onkwawenna_kentohkwa_upload',
+				'unit',
+				'side',
+				'low'
+			);
+
+		 	function onkwawenna_kentohkwa_upload( $post, $metabox ) {
+
+		 			?>
+						<div>
+							<p>All media attached to this Unit post is listed here.</p>
+							<h4>Images</h4>
+							<ul style="list-style-type: disc;">
+								<?php
+									$imagesJPG = get_attached_media('image/png', get_the_ID());
+									$imagesPNG = get_attached_media('image/jpeg', get_the_ID());
+									$images = array_merge($imagesJPG, $imagesPNG);
+									foreach($images as $image) {
+										$filename = substr($image->guid, strrpos($image->guid, '/') + 1);
+										echo '<li>' . $filename . '</li>';
+									}
+								?>
+							</ul>
+							<hr />
+							<h4>Audio</h4>
+							<ul style="list-style-type: disc;">
+								<?php
+									$audios = get_attached_media('audio/mpeg3', get_the_ID());
+									foreach($audios as $audio) {
+										$filename = substr($audio->guid, strrpos($audio->guid, '/') + 1);
+										echo '<li>' . $filename . '</li>';
+									}
+								?>
+							</ul>
+						</div>
+					<?php
+		 	}
+		}
 
 }

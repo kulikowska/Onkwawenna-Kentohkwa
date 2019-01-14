@@ -154,8 +154,9 @@ class Plugin_Name {
 
 		$plugin_admin = new Plugin_Name_Admin( $this->get_plugin_name(), $this->get_version() );
 
-        $this->loader->add_action('init', $plugin_admin, 'create_unit');
-        $this->loader->add_action('admin_menu', $plugin_admin, 'upload_units_admin_menu');
+    $this->loader->add_action( 'init', $plugin_admin, 'create_unit');
+    $this->loader->add_action( 'admin_menu', $plugin_admin, 'upload_units_admin_menu');
+		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'add_onkwawenna_kentohkwa_meta_box' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
