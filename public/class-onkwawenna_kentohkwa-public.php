@@ -100,4 +100,19 @@ class Plugin_Name_Public {
 
 	}
 
+    public function onkwawenna_kentohkwa_replace_images($content) {
+       $imagesJPG = get_attached_media('image/png', get_the_ID());
+       $imagesPNG = get_attached_media('image/jpeg', get_the_ID());
+       $images = array_merge($imagesJPG, $imagesPNG);
+
+       $new_content = $content;
+
+       foreach($images as $image) {
+        $filename = substr($image->guid, strrpos($image->guid, '/') + 1);
+        $new_content = str_replace('images/'.$filename, $image->guid, $new_content);
+       }
+       return $new_content;
+    }
+
 }
+
