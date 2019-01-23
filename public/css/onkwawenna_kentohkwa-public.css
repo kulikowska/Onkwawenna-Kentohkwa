@@ -2,3 +2,127 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+.c1:hover {
+  /* border:red thin solid; */
+  cursor: pointer;
+  background: #efefef;
+  border-radius: 4px;
+}
+.error {
+  position: fixed;
+  bottom:0;
+  right:0;
+  margin: 10px;
+  padding: 10px;
+  font-size: 15px;
+  background: red;
+  display: none;
+  color: white;
+}
+body {
+    line-height: 1em;
+}
+body .c1 {
+    line-height: 20px;
+    margin: 10px 0px;
+}
+body span, body p, body div {
+    font-family: "Calibri";
+}
+table {
+    margin: 15px 0px;
+}
+body .entry .entry-content td p {
+    word-break: keep-all;
+    padding: 10px 7px;
+    /* white-space: nowrap; */
+}
+.entry .entry-content, .entry .entry-summary {
+    overflow-x: scroll;
+}
+
+
+/* Class based stuff that might not carry over well */
+.c208, .c270, .c297 {
+    margin-left: 0px;
+}
+.c150 {
+    font-family: "Calibri";
+}
+.c12 {
+    display: inline-block;
+    margin: 25px 0px 12px;
+}
+
+/*
+.c194, .c217, .c44, .c114, .c172, .c203, .c71, .c76, .c103, .c90 {
+    white-space: unset;
+    padding: 3px 7px !important;
+}
+*/
+
+/* Previously gray table */
+
+body .c201, .c75, .c121, .c80, .c165, .c178, .c64, .c25, .c233 {
+    background-color: #fff;
+    font-family: "Calibri";
+}
+body .c83 {
+    line-height: 22px;
+    padding-top: 12px;
+}
+@media screen and (max-width: 500px) {
+    tr .c14 {
+        text-align: left;
+        margin-left: 15px;
+    }
+}
+
+/* Pager */
+ul.pager {
+    width: 96%;
+    margin: 20px auto 0px;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 0px;
+    border: 1px solid #ccc;
+    background: #f0f5ff;
+}
+.pager li, .pager button {
+    list-style: none;
+    flex-grow: 1;
+    font-weight: normal;
+    cursor: pointer;
+    padding: 5px;
+    color: #000;
+    font-size: 14px;
+    text-align: center;
+    background: transparent;
+    border-radius: 0px;
+    border: none;
+    border-right: 1px solid #ccc;
+}
+.pager button:focus {
+    outline: none;
+}
+.pager li:last-child, .pager button:last-child  {
+    border-right: none;
+}
+.pager li:hover {
+    font-weight: bold;
+}
+.pager li.active {
+    font-weight: bold;
+}
+.pager button {
+    color: #ccc;
+    pointer-events: none;
+}
+.pager button:hover {
+    background: initial;
+}
+.pager button.active {
+    color: #000;
+    pointer-events: all;
+}

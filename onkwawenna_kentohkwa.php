@@ -10,7 +10,7 @@
  *
  * @link              http://example.com
  * @since             1.0.0
- * @package           Plugin_Name
+ * @package           onkwawenna_kentohkwa
  *
  * @wordpress-plugin
  * Plugin Name:       Onkwawenna Kentohkwa 
@@ -43,7 +43,7 @@ define( 'onkwawenna_kentohkwa_VERSION', '1.0.0' );
  */
 function activate_onkwawenna_kentohkwa() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-onkwawenna_kentohkwa-activator.php';
-	Plugin_Name_Activator::activate();
+	onkwawenna_kentohkwa_Activator::activate();
 }
 
 /**
@@ -52,7 +52,7 @@ function activate_onkwawenna_kentohkwa() {
  */
 function deactivate_onkwawenna_kentohkwa() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-onkwawenna_kentohkwa-deactivator.php';
-	Plugin_Name_Deactivator::deactivate();
+	onkwawenna_kentohkwa_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_onkwawenna_kentohkwa' );
@@ -75,7 +75,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-onkwawenna_kentohkwa.php';
  */
 function run_onkwawenna_kentohkwa() {
 
-	$plugin = new Plugin_Name();
+	$plugin = new onkwawenna_kentohkwa();
 	$plugin->run();
 
 }

@@ -6,8 +6,8 @@
  * @link       http://example.com
  * @since      1.0.0
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    onkwawenna_kentohkwa
+ * @subpackage onkwawenna_kentohkwa/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    onkwawenna_kentohkwa
+ * @subpackage onkwawenna_kentohkwa/includes
  * @author     Your Name <email@example.com>
  */
-class Plugin_Name_Deactivator {
+class onkwawenna_kentohkwa_Deactivator {
 
 	/**
 	 * Short Description. (use period)
