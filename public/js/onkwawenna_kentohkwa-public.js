@@ -90,19 +90,15 @@
             }
 
             pagerItemsToShow.forEach(function(page) {
-                if (currentPage === (page)) {
-                    $('.pager .nextButton').before('<li class="active page-' + page +'">' + page + '</li>');
-                } else {
-                    $('.pager .nextButton').before('<li class="page-' + page +'" ">' + page + '</li>');
-                }
+                $('.pager .nextButton').before('<li class="page-' + page +'" ">' + page + '</li>');
                 $('.page-' + page).on('click', function() { navPage(page); });
             });
+            $('.page-' + currentPage).addClass('active');
         }
-
 
         function navPage(newPage) {
             pages.forEach(function(page) {
-                if (page === pages[newPage - 1]) {
+                if (page === newPage) {
                     $('#pagination-index-' + page).fadeIn();
                 } else {
                     $('#pagination-index-' + page).hide();
