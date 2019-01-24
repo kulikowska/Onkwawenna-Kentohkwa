@@ -42,10 +42,14 @@
             var firstEl = $(this).parentsUntil('.entry-content').last();
             var secondEl = $('.c14 .c16').eq(index + 1).parentsUntil('.entry-content').last();
 
+
             if (firstEl.get(0) !== secondEl.get(0)) {
-                pageCount++;
-                pages.push(pageCount);
-                firstEl.nextUntil(secondEl).addBack().wrapAll('<div id="pagination-index-' + pageCount +'">');
+                if (firstEl.nextUntil(secondEl).length > 1) {
+                    pageCount++;
+                    pages.push(pageCount);
+                    firstEl.nextUntil(secondEl).addBack().wrapAll('<div id="pagination-index-' + pageCount +'">');
+                }
+                    
             }
         });
 
