@@ -44,12 +44,11 @@
 
 
             if (firstEl.get(0) !== secondEl.get(0)) {
-                if (firstEl.nextUntil(secondEl).length > 1) {
+                //if (firstEl.nextUntil(secondEl).length > 1) {
                     pageCount++;
                     pages.push(pageCount);
                     firstEl.nextUntil(secondEl).addBack().wrapAll('<div id="pagination-index-' + pageCount +'">');
-                }
-                    
+                //}
             }
         });
 
@@ -63,7 +62,7 @@
                          '</div>';
 
             $('.c199:first').append(pager); 
-            $('#pagination-index-' + pages[currentPage - 1]).append(pager); 
+            $('#pagination-index-' + currentPage).append(pager); 
 
             if (currentPage !==1 ) { $('.prevButton').addClass('active'); }
             if (currentPage !== pages.length) { $('.nextButton').addClass('active'); }
@@ -109,6 +108,10 @@
                 }
             });
             drawPager(newPage);
+            $('html, body').animate({
+                scrollTop: ($('.c199').offset().top - 30)
+            },0);
+
             //console.log(updateQueryStringParameter(window.location.href, 'page', newPage));
             //window.location = updateQueryStringParameter(window.location.href, 'page', newPage);
         }
