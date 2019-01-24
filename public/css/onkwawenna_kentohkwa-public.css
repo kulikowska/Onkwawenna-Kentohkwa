@@ -3,7 +3,7 @@
  * included in this file.
  */
 
-.c1:hover {
+.c1:not(.no-hover-events):hover {
   /* border:red thin solid; */
   cursor: pointer;
   background: #efefef;

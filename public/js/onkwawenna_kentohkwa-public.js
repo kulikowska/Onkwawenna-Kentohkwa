@@ -32,6 +32,14 @@
 
 	  $(document).ready(function() {
 	 
+        // remove audio event from elements with no content
+        $("p").each(function(index) {
+            if ($(this).text().trim().length === 0) {
+                $(this).off();
+                $(this).addClass('no-hover-events');
+            }
+        });
+
         //Pagination stuff
         var pages = [];
         var activePage = 1;
