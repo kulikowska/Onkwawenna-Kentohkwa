@@ -46,17 +46,18 @@
 
         // Break unit down into sections
         var pageCount = 0;
+
         $('.c14 .c16').each(function(index) {
             var firstEl = $(this).parentsUntil('.entry-content').last();
             var secondEl = $('.c14 .c16').eq(index + 1).parentsUntil('.entry-content').last();
 
 
             if (firstEl.get(0) !== secondEl.get(0)) {
-                //if (firstEl.nextUntil(secondEl).length > 1) {
-                    pageCount++;
-                    pages.push(pageCount);
-                    firstEl.nextUntil(secondEl).addBack().wrapAll('<div id="pagination-index-' + pageCount +'">');
-                //}
+                pageCount++;
+                pages.push(pageCount);
+                firstEl.nextUntil(secondEl).addBack().wrapAll('<div id="pagination-index-' + pageCount +'">');
+
+                console.log('page ', pageCount, ' has ', firstEl.nextUntil(secondEl).addBack().text().length, ' characters'); 
             }
         });
 
@@ -157,5 +158,34 @@
         navPage(getParameterByName('page'));
     }
     */
+
+
+
+
+        //Attempt at breaking down pages by character count as well. 
+        //Almost works, but for some reason misses some content sometimes.   
+        /*
+        var els = $('.c14 .c16');
+        for (var i = 0; i < els.length; i++) {
+            var firstEl = $('.c14 .c16').eq(i).parentsUntil('.entry-content').last();
+            var secondEl = $('.c14 .c16').eq(i + 1).parentsUntil('.entry-content').last();
+
+            var count = 0;
+            while (firstEl.nextUntil(secondEl).addBack().text().length < 500) {
+                count++;
+                secondEl = $('.c14 .c16').eq(i + count).parentsUntil('.entry-content').last();
+            }
+
+            if (firstEl.get(0) !== secondEl.get(0)) {
+
+                pageCount++;
+                pages.push(pageCount);
+                firstEl.nextUntil(secondEl).addBack().wrapAll('<div id="pagination-index-' + pageCount +'">');
+                console.log('page ', pageCount, ' has this many characters: ', firstEl.nextUntil(secondEl).addBack().text().length);
+
+            i += count;
+        }
+        */
+
 
 })( jQuery );
