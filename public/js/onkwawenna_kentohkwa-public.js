@@ -73,12 +73,12 @@
             $('.c199:first').append(pager); 
             $('#pagination-index-' + currentPage).append(pager); 
 
-            if (currentPage !==1 ) { $('.prevButton').addClass('active'); }
-            if (currentPage !== pages.length) { $('.nextButton').addClass('active'); }
-
-            $('.nextButton').on('click', function() { navPage(currentPage + 1); });
-            $('.prevButton').on('click', function() { navPage(currentPage - 1); });
-
+            if (currentPage !==1 ) { 
+                $('.prevButton').addClass('active').on('click', function() { navPage(currentPage - 1); });
+            }
+            if (currentPage !== pages.length) { 
+                $('.nextButton').addClass('active').on('click', function() { navPage(currentPage + 1); });
+            }
 
             var pagerItemsToShow = [];
 
