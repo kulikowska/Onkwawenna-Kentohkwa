@@ -96,7 +96,7 @@ class onkwawenna_kentohkwa_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->onkwawenna_kentohkwa, plugin_dir_url( __FILE__ ) . 'js/onkwawenna_kentohkwa-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->onkwawenna_kentohkwa, plugin_dir_url( __FILE__ ) . 'js/onkwawenna_kentohkwa-public.js', array( 'jquery' ), mt_rand(10,1000), false );
 
 	}
 
@@ -115,4 +115,3 @@ class onkwawenna_kentohkwa_Public {
     }
 
 }
-

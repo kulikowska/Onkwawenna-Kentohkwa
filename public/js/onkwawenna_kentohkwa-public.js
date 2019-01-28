@@ -1,37 +1,7 @@
 (function( $ ) {
 	'use strict';
-
-	/**
-	 * All of the code for your public-facing JavaScript source
-	 * should reside in this file.
-	 *
-	 * Note: It has been assumed you will write jQuery code here, so the
-	 * $ function reference has been prepared for usage within the scope
-	 * of this function.
-	 *
-	 * This enables you to define handlers, for when the DOM is ready:
-	 *
-	 * $(function() {
-	 *
-	 * });
-	 *
-	 * When the window is loaded:
-	 *
-	 * $( window ).load(function() {
-	 *
-	 * });
-	 *
-	 * ...and/or other possibilities.
-	 *
-	 * Ideally, it is not considered best practise to attach more than a
-	 * single DOM-ready or window-load handler for a particular page.
-	 * Although scripts in the WordPress core, Plugins and Themes may be
-	 * practising this, we should strive to set a better example in our own work.
-	 */
-
-
 	  $(document).ready(function() {
-	 
+
         // remove audio event from elements with no content
         $("p").each(function(index) {
             if ($(this).text().trim().length === 0) {
@@ -47,9 +17,26 @@
         // Break unit down into sections
         var pageCount = 0;
 
-        $('.c14 .c16').each(function(index) {
-            var firstEl = $(this).parentsUntil('.entry-content').last();
-            var secondEl = $('.c14 .c16').eq(index + 1).parentsUntil('.entry-content').last();
+				$('.entry-content').children().each(function(index) {
+					if($(this).is('.no-hover-events') && index<30) {
+						$(this).hide();
+					}
+				});
+
+				// Write something to identify the classes for italics
+
+				var headerElements = [];
+				$("body").find("span").each(function(){
+					// Give ~22px to match 16pt
+					if(parseInt($(this).css('fontSize'))>=21 && $(this).css('fontStyle')==='italic') {
+						headerElements.push($(this));
+					}
+				});
+
+        headerElements.forEach(function(element, index) {
+					if(headerElements[index + 1]) {
+            var firstEl = element.parentsUntil('.entry-content').last();
+            var secondEl = headerElements[index + 1].parentsUntil('.entry-content').last();
 
 
             if (firstEl.get(0) !== secondEl.get(0)) {
@@ -57,26 +44,27 @@
                 pages.push(pageCount);
                 firstEl.nextUntil(secondEl).addBack().wrapAll('<div id="pagination-index-' + pageCount +'">');
 
-                console.log('page ', pageCount, ' has ', firstEl.nextUntil(secondEl).addBack().text().length, ' characters'); 
+                console.log('page ', pageCount, ' has ', firstEl.nextUntil(secondEl).addBack().text().length, ' characters');
             }
+					}
         });
 
         // Create Pager
         function drawPager(currentPage) {
             $('.pager').remove();
 
-            var pager = '<ul class="pager">' + 
+            var pager = '<ul class="pager">' +
                             '<button class="prevButton"> Prev </button>' +
                             '<button class="nextButton"> Next </button>' +
                          '</div>';
 
-            $('.c199:first').append(pager); 
-            $('#pagination-index-' + currentPage).append(pager); 
+            $('.c199:first').append(pager);
+            $('#pagination-index-' + currentPage).append(pager);
 
-            if (currentPage !==1 ) { 
+            if (currentPage !==1 ) {
                 $('.prevButton').addClass('active').on('click', function() { navPage(currentPage - 1); });
             }
-            if (currentPage !== pages.length) { 
+            if (currentPage !== pages.length) {
                 $('.nextButton').addClass('active').on('click', function() { navPage(currentPage + 1); });
             }
 
@@ -118,7 +106,7 @@
             });
             drawPager(newPage);
             $('html, body').animate({
-                scrollTop: ($('.c199').offset().top - 30)
+                scrollTop: ($('.entry-content').offset().top - 30)
             },0);
 
             //console.log(updateQueryStringParameter(window.location.href, 'page', newPage));
@@ -162,9 +150,9 @@
 
 
 
-        //Attempt at breaking down pages by character count as well. 
-        //Almost works, but for some reason misses some content sometimes.   
-        /*
+        //Attempt at breaking down pages by character count as well.
+        //Almost works, but for some reason misses some content sometimes.
+
         var els = $('.c14 .c16');
         for (var i = 0; i < els.length; i++) {
             var firstEl = $('.c14 .c16').eq(i).parentsUntil('.entry-content').last();
@@ -183,9 +171,10 @@
                 firstEl.nextUntil(secondEl).addBack().wrapAll('<div id="pagination-index-' + pageCount +'">');
                 console.log('page ', pageCount, ' has this many characters: ', firstEl.nextUntil(secondEl).addBack().text().length);
 
-            i += count;
+            		i += count;
+						}
         }
-        */
+
 
 
 })( jQuery );
