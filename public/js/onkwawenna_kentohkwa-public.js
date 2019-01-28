@@ -34,10 +34,11 @@
 				});
 
         headerElements.forEach(function(element, index) {
-					if(headerElements[index + 1]) {
             var firstEl = element.parentsUntil('.entry-content').last();
-            var secondEl = headerElements[index + 1].parentsUntil('.entry-content').last();
-
+						var secondEl = $('.entry-content:last-child');
+						if(headerElements[index + 1]) {
+							secondEl = headerElements[index + 1].parentsUntil('.entry-content').last();
+						}
 
             if (firstEl.get(0) !== secondEl.get(0)) {
                 pageCount++;
@@ -46,8 +47,19 @@
 
                 console.log('page ', pageCount, ' has ', firstEl.nextUntil(secondEl).addBack().text().length, ' characters');
             }
-					}
         });
+
+				// Set initial page
+				setTimeout(function() {
+					var url = window.location.hash;
+					var hash = url.substring(url.indexOf('#'));
+					if(hash.length) {
+						if(hash.indexOf('#page-')>-1) {
+							var pageNumber = hash.replace('#page-', '');
+							navPage(parseInt(pageNumber));
+						}
+					}
+				},500);
 
         // Create Pager
         function drawPager(currentPage) {
@@ -71,16 +83,25 @@
             var pagerItemsToShow = [];
 
             if (currentPage > 2 && currentPage < (pages.length - 2)) {
-                pagerItemsToShow.push(currentPage -2, currentPage -1);
-                for (var i = currentPage - 1; i < (currentPage + 2); i++) {
+                // pagerItemsToShow.push(currentPage -2, currentPage -1);
+                // for (var i = currentPage - 1; i < (currentPage + 2); i++) {
+                //     pagerItemsToShow.push(i+1);
+                // }
+                for (var i = 0; i < pages.length; i++) {
                     pagerItemsToShow.push(i+1);
                 }
             } else if (currentPage > (pages.length - 3)) {
-                for (var i = pages.length - 5; i < pages.length; i++) {
+                // for (var i = pages.length - 5; i < pages.length; i++) {
+                //     pagerItemsToShow.push(i+1);
+                // }
+                for (var i = 0; i < pages.length; i++) {
                     pagerItemsToShow.push(i+1);
                 }
             } else if (pages.length > 4) {
-                for (var i = 0; i < 5; i++) {
+                // for (var i = 0; i < pages.length; i++) {
+                //     pagerItemsToShow.push(i+1);
+                // }
+                for (var i = 0; i < pages.length; i++) {
                     pagerItemsToShow.push(i+1);
                 }
             } else {
@@ -105,6 +126,9 @@
                 }
             });
             drawPager(newPage);
+						if(newPage!==1) {
+							location.hash = '#page-'+newPage;
+						}
             $('html, body').animate({
                 scrollTop: ($('.entry-content').offset().top - 30)
             },0);
@@ -153,27 +177,27 @@
         //Attempt at breaking down pages by character count as well.
         //Almost works, but for some reason misses some content sometimes.
 
-        var els = $('.c14 .c16');
-        for (var i = 0; i < els.length; i++) {
-            var firstEl = $('.c14 .c16').eq(i).parentsUntil('.entry-content').last();
-            var secondEl = $('.c14 .c16').eq(i + 1).parentsUntil('.entry-content').last();
-
-            var count = 0;
-            while (firstEl.nextUntil(secondEl).addBack().text().length < 500) {
-                count++;
-                secondEl = $('.c14 .c16').eq(i + count).parentsUntil('.entry-content').last();
-            }
-
-            if (firstEl.get(0) !== secondEl.get(0)) {
-
-                pageCount++;
-                pages.push(pageCount);
-                firstEl.nextUntil(secondEl).addBack().wrapAll('<div id="pagination-index-' + pageCount +'">');
-                console.log('page ', pageCount, ' has this many characters: ', firstEl.nextUntil(secondEl).addBack().text().length);
-
-            		i += count;
-						}
-        }
+        // var els = $('.c14 .c16');
+        // for (var i = 0; i < els.length; i++) {
+        //     var firstEl = $('.c14 .c16').eq(i).parentsUntil('.entry-content').last();
+        //     var secondEl = $('.c14 .c16').eq(i + 1).parentsUntil('.entry-content').last();
+				//
+        //     var count = 0;
+        //     while (firstEl.nextUntil(secondEl).addBack().text().length < 500) {
+        //         count++;
+        //         secondEl = $('.c14 .c16').eq(i + count).parentsUntil('.entry-content').last();
+        //     }
+				//
+        //     if (firstEl.get(0) !== secondEl.get(0)) {
+				//
+        //         pageCount++;
+        //         pages.push(pageCount);
+        //         firstEl.nextUntil(secondEl).addBack().wrapAll('<div id="pagination-index-' + pageCount +'">');
+        //         console.log('page ', pageCount, ' has this many characters: ', firstEl.nextUntil(secondEl).addBack().text().length);
+				//
+        //     		i += count;
+				// 		}
+        // }
 
 
 
